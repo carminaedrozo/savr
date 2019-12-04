@@ -4,21 +4,28 @@ class BarcodeScan extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //backgroundColor: Color(0xFF5ACEFF),
       appBar: AppBar(
         title: Center(
           child: Text(
             'Scan',
           ),
         ),
+        backgroundColor: Colors.white,
       ),
-      body: Center(
-        child: Text(
-          'hi',
-          style: TextStyle(
-            fontSize: 20.0,
-          ),
-        ),
-      ),
+      bottomNavigationBar: BottomNavigationBar(
+       items: [
+         BottomNavigationBarItem(
+           icon: new Icon(Icons.history),
+           title: new Text('History'),
+         ),
+         BottomNavigationBarItem(
+           icon: new Icon(Icons.texture),
+           title: new Text('Scan'),
+         ),
+         
+       ],
+     ),
     );
   }
 }
