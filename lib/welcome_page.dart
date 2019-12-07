@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:savr/barcode_scan.dart';
+import 'barcode_scan.dart';
 
 class WelcomePage extends StatefulWidget {
   @override
@@ -13,7 +13,7 @@ class _WelcomePageState extends State<WelcomePage> {
     Future.delayed(const Duration(seconds: 3), () {
       setState(() {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => BarcodeScan()));
+            context, MaterialPageRoute(builder: (context) => Scan()));
       });
     });
   }
