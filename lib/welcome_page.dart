@@ -10,7 +10,7 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 3), () {
       setState(() {
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Home()));

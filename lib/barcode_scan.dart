@@ -34,12 +34,11 @@ class _ScanState extends State<Scan> {
     // message was in flight, we want to discard the reply rather than calling
     // setState to update our non-existent appearance.
     if (!mounted) return;
-
+    _scanBarcode = barcodeScanRes;
     setState(() {
-      _scanBarcode = barcodeScanRes;
-
-      _save(_scanBarcode);
       if (barcodeScanRes != '-1') {
+        _save(_scanBarcode);
+
         Navigator.push(
             context,
             MaterialPageRoute(
@@ -61,6 +60,8 @@ class _ScanState extends State<Scan> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   RaisedButton(
+                      color: Color(0xFF5ACEFF),
+                      textColor: Colors.white,
                       onPressed: () => scanBarcodeNormal(),
                       child: Text("Start barcode scan")),
                 ]));
