@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:savr/history.dart';
 import 'package:savr/product_page.dart';
 
@@ -24,6 +25,10 @@ class _HistoryPageState extends State<HistoryPage> {
                         final item = snapshot.data[position];
                         return Card(
                           child: ListTile(
+                            leading: Icon(
+                              FontAwesomeIcons.barcode,
+                              color: Color(0xFF5ACEFF),
+                            ),
                             onTap: () {
                               Navigator.push(
                                   context,
@@ -32,16 +37,23 @@ class _HistoryPageState extends State<HistoryPage> {
                                             barcode: item.barcode,
                                           )));
                             },
-                            title: Text(item.product + " " + item.barcode),
+                            title: Text(item.barcode),
                           ),
                         );
                       },
                     )
                   : Center(
                       child: Text(
-                        'No history',
+                        'No history.',
                       ),
                     );
             }));
+  }
+}
+
+class Loading extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }

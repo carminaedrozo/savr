@@ -38,7 +38,7 @@ class _ScanState extends State<Scan> {
     setState(() {
       _scanBarcode = barcodeScanRes;
 
-      _save("ProductTest", _scanBarcode);
+      _save(_scanBarcode);
       if (barcodeScanRes != '-1') {
         Navigator.push(
             context,
@@ -68,9 +68,9 @@ class _ScanState extends State<Scan> {
     );
   }
 
-  _save(String product, String barcode) async {
+  _save(String barcode) async {
     Word word = Word();
-    word.product = product;
+    word.product = "product";
     word.barcode = barcode;
     DatabaseHelper helper = DatabaseHelper.instance;
     await helper.insert(word);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
 import 'dart:async';
+import 'package:dio/dio.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({@required this.barcode});

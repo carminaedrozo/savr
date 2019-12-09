@@ -104,9 +104,9 @@ class DatabaseHelper {
     return null;
   }
 
-  Future<int> deleteWord(int id) async {
+  deleteAll() async {
     Database db = await database;
-    return await db.delete(tableWords, where: '$columnId = ?', whereArgs: [id]);
+    return await db.rawDelete('DELETE FROM ' + tableWords);
   }
 
   Future<int> update(Word word) async {
