@@ -41,8 +41,8 @@ class _ScanState extends State<Scan> {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => PostView(
-                      //barcode: _scanBarcode,
+                builder: (context) => ProductPage(
+                      barcode: _scanBarcode,
                     )));
       }
     });

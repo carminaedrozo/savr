@@ -107,7 +107,7 @@ class PostView extends StatefulWidget {
 
   Map<String, dynamic> post;
 
-  PostView(this.post);
+  PostView(this.post, {String barcode});
 
   @override
   _PostViewState createState() => _PostViewState();
