@@ -6,7 +6,7 @@ import 'dart:io';
 
 Future<List<dynamic>> fetchPosts() async{
   List posts = [];
-  var response = await Dio().get("https://frozen-shore-19761.herokuapp.com/api/v1/product?serial=9100063",);
+  var response = await Dio().get("https://frozen-shore-19761.herokuapp.com/api/v1/product?serial=910001935",);
   posts = response.data;
   print(response.data);
   return posts;
