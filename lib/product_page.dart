@@ -6,13 +6,7 @@ import 'dart:io';
 
 Future<List<dynamic>> fetchPosts() async{
   List posts = [];
-  String token = "Bearer ???";
-  var response = await Dio().get("https://frozen-shore-19761.herokuapp.com/api/v1/products", 
-  options: Options(
-    headers: {
-      HttpHeaders.authorizationHeader: token, // set content-length
-    },
-  ),);
+  var response = await Dio().get("https://frozen-shore-19761.herokuapp.com/api/v1/products",);
 
   posts = response.data;
   print(response.data);
@@ -87,12 +81,25 @@ class ScreenOne extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Instagram"),),
+      appBar: AppBar(title: Text("Product Page"),),
       body: ListView.builder(
         itemCount: posts.length,
         itemBuilder: (context, i){
           return PostView(posts[i]);
         },
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.history, color: Colors.white,),
+            title: new Text('History',  style: TextStyle(color: Colors.white)),
+          ),
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.texture, color: Colors.white,),
+            title: new Text('Scan', style: TextStyle(color: Colors.white)),
+          ),
+        ],
+        backgroundColor: Color(0xFF5ACEFF),
       ),);
   }
 }
