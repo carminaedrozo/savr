@@ -14,7 +14,7 @@ class _WelcomePageState extends State<WelcomePage> {
     Future.delayed(const Duration(seconds: 3), () {
       setState(() {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => ProductPage(barcode: "Test",)));
+            context, MaterialPageRoute(builder: (context) =>  ProductPage(barcode: "Test",)));
       });
     });
   }
