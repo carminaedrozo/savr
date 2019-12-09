@@ -6,7 +6,7 @@ import 'dart:io';
 
 Future<List<dynamic>> fetchPosts() async{
   List posts = [];
-  var response = await Dio().get("https://frozen-shore-19761.herokuapp.com/api/v1/products",);
+  var response = await Dio().get("https://frozen-shore-19761.herokuapp.com/api/v1/product?serial=9100063",);
   posts = response.data;
   print(response.data);
   return posts;
@@ -19,6 +19,7 @@ class ProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -49,7 +50,10 @@ class ProductPage extends StatelessWidget {
   }
 }
 
+
+
 class HomeScreen extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
   return FutureBuilder<List<dynamic>>(
@@ -71,6 +75,8 @@ class HomeScreen extends StatelessWidget {
 );
   }
 }
+
+
 
 class ScreenOne extends StatelessWidget {
   List<dynamic> posts;
@@ -118,6 +124,8 @@ class _PostViewState extends State<PostView> {
   Widget build(BuildContext context) {
     return Container(
       child: Column(children: <Widget>[
+
+        
         Text(widget.post["seller"]),
         Image.network(widget.post["image_url"]),
         Text(widget.post["brand"]),
