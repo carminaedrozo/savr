@@ -74,14 +74,15 @@ class _ScanState extends State<Scan> {
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
-            icon: new Icon(Icons.history),
-            title: new Text('History'),
+            icon: new Icon(Icons.history, color: Colors.white,),
+            title: new Text('History',  style: TextStyle(color: Colors.white)),
           ),
           BottomNavigationBarItem(
-            icon: new Icon(Icons.texture),
-            title: new Text('Scan'),
+            icon: new Icon(Icons.texture, color: Colors.white,),
+            title: new Text('Scan', style: TextStyle(color: Colors.white)),
           ),
         ],
+        backgroundColor: Color(0xFF5ACEFF),
       ),
     );
   }
