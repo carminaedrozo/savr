@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:savr/product_page.dart';
+import 'history.dart';
 
 class Scan extends StatefulWidget {
   @override
@@ -37,6 +38,7 @@ class _ScanState extends State<Scan> {
     setState(() {
       _scanBarcode = barcodeScanRes;
 
+      _save("ProductTest", _scanBarcode);
       if (barcodeScanRes != '-1') {
         Navigator.push(
             context,
@@ -50,16 +52,8 @@ class _ScanState extends State<Scan> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Text(
-            'Scan',
-          ),
-        ),
-        backgroundColor: Colors.white,
-      ),
-      body: Builder(builder: (BuildContext context) {
+    return Container(
+      child: Builder(builder: (BuildContext context) {
         return Container(
             alignment: Alignment.center,
             child: Flex(
@@ -71,25 +65,14 @@ class _ScanState extends State<Scan> {
                       child: Text("Start barcode scan")),
                 ]));
       }),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: new Icon(
-              Icons.history,
-              color: Colors.white,
-            ),
-            title: new Text('History', style: TextStyle(color: Colors.white)),
-          ),
-          BottomNavigationBarItem(
-            icon: new Icon(
-              Icons.texture,
-              color: Colors.white,
-            ),
-            title: new Text('Scan', style: TextStyle(color: Colors.white)),
-          ),
-        ],
-        backgroundColor: Color(0xFF5ACEFF),
-      ),
     );
+  }
+
+  _save(String product, String barcode) async {
+    Word word = Word();
+    word.product = product;
+    word.barcode = barcode;
+    DatabaseHelper helper = DatabaseHelper.instance;
+    await helper.insert(word);
   }
 }
