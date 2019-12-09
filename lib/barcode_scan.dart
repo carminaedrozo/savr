@@ -41,7 +41,7 @@ class _ScanState extends State<Scan> {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => ProductPage(
+                builder: (context) => HomeScreen(
                       barcode: _scanBarcode,
                     )));
       }
@@ -74,11 +74,17 @@ class _ScanState extends State<Scan> {
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
-            icon: new Icon(Icons.history, color: Colors.white,),
-            title: new Text('History',  style: TextStyle(color: Colors.white)),
+            icon: new Icon(
+              Icons.history,
+              color: Colors.white,
+            ),
+            title: new Text('History', style: TextStyle(color: Colors.white)),
           ),
           BottomNavigationBarItem(
-            icon: new Icon(Icons.texture, color: Colors.white,),
+            icon: new Icon(
+              Icons.texture,
+              color: Colors.white,
+            ),
             title: new Text('Scan', style: TextStyle(color: Colors.white)),
           ),
         ],

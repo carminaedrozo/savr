@@ -1,91 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'dart:async';
-import 'dart:io';
 
-
-/* Future<List<dynamic>> fetchPosts() async{
-  List posts = [];
-  var response = await Dio().get("https://frozen-shore-19761.herokuapp.com/api/v1/product?serial=910001935",);
-  posts = response.data;
-  print(response.data);
-  return posts;
-} */
-
-class ProductPage extends StatelessWidget {
-  ProductPage({@required this.barcode});
+class HomeScreen extends StatelessWidget {
+  HomeScreen({@required this.barcode});
 
   final String barcode;
-
-
-  Future<List<dynamic>> fetchPosts() async{
-  List posts = [];
-  var response = await Dio().get("https://frozen-shore-19761.herokuapp.com/api/v1/products/$barcode",);
-  posts = response.data;
-  print(response.data);
-  return posts;
-}
+  Future<List<dynamic>> fetchPosts() async {
+    List posts = [];
+    var response = await Dio().get(
+      "https://frozen-shore-19761.herokuapp.com/api/v1/products/$barcode",
+    );
+    posts = response.data;
+    print(response.data);
+    return posts;
+  }
 
   @override
   Widget build(BuildContext context) {
-    
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Products',
-          ),
-        ),
-        body: Builder(builder: (BuildContext context) {
-
-        return Container(
-            alignment: Alignment.center,
-            );
-      }),
-      
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: new Icon(Icons.history, color: Colors.white,),
-            title: new Text('History',  style: TextStyle(color: Colors.white)),
-          ),
-          BottomNavigationBarItem(
-            icon: new Icon(Icons.texture, color: Colors.white,),
-            title: new Text('Scan', style: TextStyle(color: Colors.white)),
-          ),
-        ],
-        backgroundColor: Color(0xFF5ACEFF),
-      ),
+    return FutureBuilder<List<dynamic>>(
+      future: fetchPosts(), // a previously-obtained Future<String> or null
+      builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.none:
+            return Text('Press button to start.');
+          case ConnectionState.active:
+          case ConnectionState.waiting:
+          //return Text('Awaiting result...');
+          case ConnectionState.done:
+            if (snapshot.hasError) return Text('Error: ${snapshot.error}');
+            return ScreenOne(snapshot.data);
+        }
+        return null; // unreachable
+      },
     );
   }
 }
-
-
-
-class HomeScreen extends StatelessWidget {
-  
-  @override
-  Widget build(BuildContext context) {
-  return FutureBuilder<List<dynamic>>(
-  future: fetchPosts(), // a previously-obtained Future<String> or null
-  builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
-    switch (snapshot.connectionState) {
-      case ConnectionState.none:
-        return Text('Press button to start.');
-      case ConnectionState.active:
-      case ConnectionState.waiting:
-        //return Text('Awaiting result...');
-      case ConnectionState.done:
-        if (snapshot.hasError)
-          return Text('Error: ${snapshot.error}');
-        return ScreenOne(snapshot.data);
-    }
-    return null; // unreachable
-  },
-);
-  }
-}
-
-
 
 class ScreenOne extends StatelessWidget {
   List<dynamic> posts;
@@ -95,31 +45,39 @@ class ScreenOne extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Product Page"),),
+      appBar: AppBar(
+        title: Text("Product Page"),
+      ),
       body: ListView.builder(
         itemCount: posts.length,
-        itemBuilder: (context, i){
+        itemBuilder: (context, i) {
           return PostView(posts[i]);
         },
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
-            icon: new Icon(Icons.history, color: Colors.white,),
-            title: new Text('History',  style: TextStyle(color: Colors.white)),
+            icon: new Icon(
+              Icons.history,
+              color: Colors.white,
+            ),
+            title: new Text('History', style: TextStyle(color: Colors.white)),
           ),
           BottomNavigationBarItem(
-            icon: new Icon(Icons.texture, color: Colors.white,),
+            icon: new Icon(
+              Icons.texture,
+              color: Colors.white,
+            ),
             title: new Text('Scan', style: TextStyle(color: Colors.white)),
           ),
         ],
         backgroundColor: Color(0xFF5ACEFF),
-      ),);
+      ),
+    );
   }
 }
 
 class PostView extends StatefulWidget {
-
   Map<String, dynamic> post;
 
   PostView(this.post, {String barcode});
@@ -132,24 +90,21 @@ class _PostViewState extends State<PostView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(children: <Widget>[
+      child: Column(
+        children: <Widget>[
+          Text(widget.post["seller"]),
+          Image.network(widget.post["image_url"]),
+          Text(widget.post["brand"]),
 
-        
-        Text(widget.post["seller"]),
-        Image.network(widget.post["image_url"]),
-        Text(widget.post["brand"]),
-        
-       // Image.network(widget.post["seller_logo"]),
+          // Image.network(widget.post["seller_logo"]),
 
-        Text(widget.post["color"]),
-        Text(widget.post["price"]),
-      ],),
+          Text(widget.post["color"]),
+          Text(widget.post["price"]),
+        ],
+      ),
     );
   }
 }
-
-
-
 
 /* import 'dart:convert';
 
@@ -162,7 +117,7 @@ void main() => runApp(MyApp());
 Future<List<dynamic>> fetchPosts() async{
   List posts = [];
   String token = "Bearer ???";
-  var response = await Dio().get("https://frozen-shore-19761.herokuapp.com/api/v1/products", 
+  var response = await Dio().get("https://frozen-shore-19761.herokuapp.com/api/v1/products",
   options: Options(
     headers: {
       HttpHeaders.authorizationHeader: token, // set content-length
@@ -256,7 +211,7 @@ class _PostViewState extends State<PostView> {
         Text(widget.post["seller"]),
         Image.network(widget.post["image_url"]),
         Text(widget.post["brand"]),
-        
+
        // Image.network(widget.post["seller_logo"]),
 
         Text(widget.post["color"]),
