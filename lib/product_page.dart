@@ -4,18 +4,27 @@ import 'dart:async';
 import 'dart:io';
 
 
-Future<List<dynamic>> fetchPosts() async{
+/* Future<List<dynamic>> fetchPosts() async{
   List posts = [];
   var response = await Dio().get("https://frozen-shore-19761.herokuapp.com/api/v1/product?serial=910001935",);
   posts = response.data;
   print(response.data);
   return posts;
-}
+} */
 
 class ProductPage extends StatelessWidget {
   ProductPage({@required this.barcode});
 
   final String barcode;
+
+
+  Future<List<dynamic>> fetchPosts() async{
+  List posts = [];
+  var response = await Dio().get("https://frozen-shore-19761.herokuapp.com/api/v1/products/$barcode",);
+  posts = response.data;
+  print(response.data);
+  return posts;
+}
 
   @override
   Widget build(BuildContext context) {
