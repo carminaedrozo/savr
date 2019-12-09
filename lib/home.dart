@@ -27,7 +27,10 @@ class _HomeState extends State<Home> {
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.delete_outline),
+            icon: Icon(
+              Icons.delete_outline,
+              color: Color(0xFF5ACEFF),
+            ),
             color: Colors.black,
             onPressed: () {
               _showDialog();
